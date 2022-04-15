@@ -1,16 +1,16 @@
-import { CreateUserDTO } from "../dtos/UserDTO";
-import { UserModel } from "../models/User";
+import { CreateUserDTO } from '../dtos/UserDTO';
+import { UserModel } from '../models/User';
 
 export class CreateUserService {
-  async execute({
+  async execute ({
     avatar,
     email,
     name,
     socketId
-  }: CreateUserDTO){
+  }: CreateUserDTO) {
     const userAlreadyExists = await UserModel.findOne({ email });
 
-    if(userAlreadyExists) {
+    if (userAlreadyExists) {
       const updatedUser = await UserModel.findOneAndUpdate({
         _id: userAlreadyExists._id
       }, {
