@@ -8,7 +8,10 @@ export type User = Document & {
 };
 
 const UserSchema = new Schema({
-  email: String,
+  email: {
+    type: String,
+    unique: true,
+  },
   socketId: String,
   name: String,
   avatar: String
