@@ -1,6 +1,8 @@
+import { injectable } from 'tsyringe';
 import { CreateUserDTO } from '../dtos/UserDTO';
 import { UserModel } from '../models/User';
 
+@injectable()
 export class CreateUserService {
   async execute ({
     avatar,
