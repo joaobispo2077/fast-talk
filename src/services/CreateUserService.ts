@@ -1,27 +1,26 @@
 import { injectable } from 'tsyringe';
+
 import { CreateUserDTO } from '../dtos/UserDTO';
 import { UserModel } from '../models/User';
 
 @injectable()
 export class CreateUserService {
-  async execute ({
-    avatar,
-    email,
-    name,
-    socketId
-  }: CreateUserDTO) {
+  async execute({ avatar, email, name, socketId }: CreateUserDTO) {
     const userAlreadyExists = await UserModel.findOne({ email });
 
     if (userAlreadyExists) {
-      const updatedUser = await UserModel.findOneAndUpdate({
-        _id: userAlreadyExists._id
-      }, {
-        $set: {
-          socketId,
-          avatar,
-          name
-        }
-      });
+      const updatedUser = await UserModel.findOneAndUpdate(
+        {
+          _id: userAlreadyExists._id,
+        },
+        {
+          $set: {
+            socketId,
+            avatar,
+            name,
+          },
+        },
+      );
 
       return updatedUser;
     }
@@ -30,7 +29,7 @@ export class CreateUserService {
       email,
       socketId,
       name,
-      avatar
+      avatar,
     });
 
     return user;

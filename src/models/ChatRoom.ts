@@ -1,10 +1,12 @@
-import mongoose, { Document, Schema } from "mongoose";
-import { User } from "./User";
-import crypto from "crypto";
+import mongoose, { Document, Schema } from 'mongoose';
+
+import { User } from './User';
+
+import crypto from 'crypto';
 
 export type ChatRoom = Document & {
-  chatRoomId: string,
-  usersId: string[],
+  chatRoomId: string;
+  usersId: string[];
 };
 
 export const ChatRoomSchema = new Schema({
@@ -12,10 +14,15 @@ export const ChatRoomSchema = new Schema({
     type: String,
     default: () => crypto.randomUUID(),
   },
-  usersId: [{
-    type: Schema.Types.ObjectId,
-    ref: "Users",
-  }],
+  usersId: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Users',
+    },
+  ],
 });
 
-export const ChatRoomModel = mongoose.model<ChatRoom>("ChatRooms", ChatRoomSchema);
+export const ChatRoomModel = mongoose.model<ChatRoom>(
+  'ChatRooms',
+  ChatRoomSchema,
+);
