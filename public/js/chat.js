@@ -12,5 +12,10 @@ function onLoad() {
   const email = urlParams.get('email');
 
   console.log(name, avatar, email);
+  socket.emit('start_chat', {
+    email,
+    name,
+    avatar,
+  });
 }
 onLoad();

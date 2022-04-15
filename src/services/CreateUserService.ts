@@ -20,6 +20,7 @@ export class CreateUserService {
             name,
           },
         },
+        { new: true },
       );
 
       return updatedUser;

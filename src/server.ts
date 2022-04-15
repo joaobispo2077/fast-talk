@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import { APP_PORT } from './configs';
 import { server } from './http';
 import './websockets';
