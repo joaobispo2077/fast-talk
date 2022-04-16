@@ -20,7 +20,7 @@ function onLoad() {
   `;
 
   console.log(name, avatar, email);
-  socket.emit('start_chat', {
+  socket.emit('start_view', {
     email,
     name,
     avatar,
@@ -43,7 +43,6 @@ function onLoad() {
     });
   });
 }
-onLoad();
 
 function addUser(user) {
   const userList = document.getElementById('users_list');
@@ -61,3 +60,22 @@ function addUser(user) {
     </li>
 `;
 }
+
+document.getElementById('users_list').addEventListener('click', (event) => {
+  if (event.target && event.target.matches('li.user_name_list')) {
+    const idUser = event.target.getAttribute('idUser');
+
+    socket.emit(
+      'start_chat',
+      {
+        idUser,
+      },
+      (room) => {
+        console.log('chatRoom', room);
+        const roomId = room.chatRoomId;
+      },
+    );
+  }
+});
+
+onLoad();

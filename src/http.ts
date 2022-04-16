@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import mongoose from 'mongoose';
 import { Server as SocketIoServer } from 'socket.io';
 
@@ -13,6 +13,10 @@ const app = express();
 
 const server = createServer(app);
 app.use(express.static(path.join(__dirname, '..', 'public')));
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  console.error(err.stack);
+  return res.status(500).send('Something broke!');
+});
 
 const io = new SocketIoServer(server);
 io.on('connection', (socket) => {

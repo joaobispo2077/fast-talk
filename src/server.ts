@@ -1,4 +1,5 @@
 import 'reflect-metadata';
+import 'express-async-errors';
 import { APP_PORT } from './configs';
 import { server } from './http';
 import './websockets';
