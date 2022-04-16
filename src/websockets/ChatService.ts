@@ -17,6 +17,7 @@ io.on('connect', (socket) => {
       socketId: socket.id,
     });
 
+    socket.broadcast.emit('new_users', user);
     console.log(user);
   });
 });
