@@ -29,6 +29,12 @@ function onLoad() {
   socket.on('new_users', (data) => {
     addUser(data);
   });
+
+  socket.on('get_users', (users) => {
+    console.info('get_users', users);
+
+    users.forEach(addUser);
+  });
 }
 onLoad();
 
