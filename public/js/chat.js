@@ -26,14 +26,21 @@ function onLoad() {
     avatar,
   });
 
-  socket.on('new_users', (data) => {
-    addUser(data);
+  socket.on('user_entered', (user) => {
+    const isUserAlreadyExists = document.getElementById(`user_${user._id}`);
+    if (!isUserAlreadyExists) {
+      addUser(user);
+    }
   });
 
   socket.on('get_users', (users) => {
     console.info('get_users', users);
 
-    users.forEach(addUser);
+    users.forEach((user) => {
+      if (user.email !== email) {
+        addUser(user);
+      }
+    });
   });
 }
 onLoad();

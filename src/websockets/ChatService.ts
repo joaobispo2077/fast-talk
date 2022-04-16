@@ -18,7 +18,7 @@ io.on('connect', (socket) => {
       socketId: socket.id,
     });
 
-    socket.broadcast.emit('new_users', user);
+    socket.broadcast.emit('user_entered', user);
     console.log(user);
 
     const getAllUsersService = container.resolve(GetAllUsersService);
