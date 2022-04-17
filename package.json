@@ -1,5 +1,7 @@
 {
   "scripts": {
+    "start": "node dist/server.js",
+    "build": "tsc -p tsconfig-build.json",
     "dev": "ts-node-dev src/server.ts",
     "lint": "eslint ./src --ext .ts --fix"
   },
