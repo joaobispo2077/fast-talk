@@ -6,12 +6,13 @@ import { CreateMessageService } from '../services/CreateMessageService';
 import { CreateUserService } from '../services/CreateUserService';
 import { GetAllUsersService } from '../services/GetAllUsersService';
 import { GetChatRoomByUsersService } from '../services/GetChatRoomByUsersService';
+import { GetMessagesByChatRoomIdService } from '../services/GetMessagesByChatRoomIdService';
 import { GetUserBySocketIdService } from '../services/GetUserBySocketIdService';
 
 io.on('connect', (socket) => {
   socket.emit('chat_initialized', 'Welcome to the chat!');
 
-  socket.on('start_view', async (data) => {
+  socket.on('open_chat', async (data) => {
     const { name, email, avatar } = data;
 
     const createUserService = container.resolve(CreateUserService);
@@ -49,7 +50,15 @@ io.on('connect', (socket) => {
 
       console.log('chatRoom', chatRoom);
       socket.join(chatRoom.chatRoomId);
-      callback(chatRoom);
+
+      const getMessagesByChatRoomIdService = container.resolve(
+        GetMessagesByChatRoomIdService,
+      );
+      const previousMessages = await getMessagesByChatRoomIdService.execute(
+        chatRoom.chatRoomId,
+      );
+
+      callback({ chatRoom, previousMessages });
     });
   });
 

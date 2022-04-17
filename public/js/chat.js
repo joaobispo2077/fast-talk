@@ -22,7 +22,7 @@ function onLoad() {
   `;
 
   console.log(name, avatar, email);
-  socket.emit('start_view', {
+  socket.emit('open_chat', {
     email,
     name,
     avatar,
@@ -91,9 +91,18 @@ document.getElementById('users_list').addEventListener('click', (event) => {
       {
         idUser,
       },
-      (room) => {
-        console.log('chatRoom', room);
-        chatRoomId = room.chatRoomId;
+      (data) => {
+        console.log('start_chat data', data);
+        console.log('chatRoom', data.chatRoom);
+        chatRoomId = data.chatRoom.chatRoomId;
+
+        data.previousMessages.forEach((message) => {
+          const messagePayload = {
+            message,
+            user: message.from,
+          };
+          addMessage(messagePayload);
+        });
       },
     );
   }
