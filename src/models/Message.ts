@@ -8,7 +8,7 @@ export type Message = Document & {
 };
 
 export const MessageSchema = new Schema({
-  to: {
+  from: {
     type: Schema.Types.ObjectId,
     ref: 'Users',
   },

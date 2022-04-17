@@ -1,7 +1,5 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
-import { User } from './User';
-
 import crypto from 'crypto';
 
 export type ChatRoom = Document & {

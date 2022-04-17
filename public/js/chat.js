@@ -1,6 +1,8 @@
 /* eslint-disable no-undef */
 const socket = io('http://localhost:3333');
 
+let chatRoomId = null;
+
 socket.on('chat_initialized', (data) => {
   console.log(data);
 });
@@ -42,6 +44,11 @@ function onLoad() {
       }
     });
   });
+
+  socket.on('new_message', (data) => {
+    console.log('receive new message event');
+    console.log('new_message', data);
+  });
 }
 
 function addUser(user) {
@@ -72,10 +79,32 @@ document.getElementById('users_list').addEventListener('click', (event) => {
       },
       (room) => {
         console.log('chatRoom', room);
-        const roomId = room.chatRoomId;
+        chatRoomId = room.chatRoomId;
       },
     );
   }
 });
+
+document
+  .getElementById('user_message')
+  .addEventListener('keypress', (event) => {
+    // socket.emit('typing', {
+    //   email,
+    // });
+
+    if (event.key === 'Enter') {
+      const text = event.target.value;
+      console.log('message', text);
+
+      const data = {
+        text,
+        chatRoomId,
+      };
+
+      socket.emit('message', data);
+
+      event.target.value = '';
+    }
+  });
 
 onLoad();
