@@ -48,6 +48,7 @@ function onLoad() {
   socket.on('new_message', (data) => {
     console.log('receive new message event');
     console.log('new_message', data);
+    addMessage(data);
   });
 }
 
@@ -66,6 +67,19 @@ function addUser(user) {
       ${user.name}
     </li>
 `;
+}
+
+function addMessage(data) {
+  const divMessageUser = document.getElementById('message_user');
+  divMessageUser.innerHTML += `
+  <span class="user_name user_name_date">
+  <img class="img_user" src="${data.user.avatar}" />
+  <strong>${data.user.name}</strong>
+  <span> ${dayjs(data.message.createdAt).format('DD/MM/YYYY')}</span></span>
+  <div class="messages">
+    <span class="chat_message">${data.message.text}</span>
+  </div>
+  `;
 }
 
 document.getElementById('users_list').addEventListener('click', (event) => {
@@ -102,7 +116,7 @@ document
       };
 
       socket.emit('message', data);
-
+      console.log('message data', data);
       event.target.value = '';
     }
   });

@@ -63,7 +63,7 @@ io.on('connect', (socket) => {
 
     const message = await createMessageService.execute({
       chatRoomId: data.chatRoomId,
-      text: data.message,
+      text: data.text,
       from: user?._id,
     });
 
