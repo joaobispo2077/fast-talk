@@ -5,6 +5,7 @@ import { CreateChatRoomService } from '../services/CreateChatRoomService';
 import { CreateMessageService } from '../services/CreateMessageService';
 import { CreateUserService } from '../services/CreateUserService';
 import { GetAllUsersService } from '../services/GetAllUsersService';
+import { GetChatRoomByIdService } from '../services/GetChatRoomByIdService';
 import { GetChatRoomByUsersService } from '../services/GetChatRoomByUsersService';
 import { GetMessagesByChatRoomIdService } from '../services/GetMessagesByChatRoomIdService';
 import { GetUserBySocketIdService } from '../services/GetUserBySocketIdService';
@@ -49,6 +50,7 @@ io.on('connect', (socket) => {
       }
 
       console.log('chatRoom', chatRoom);
+      // relaciona o socket a um chat
       socket.join(chatRoom.chatRoomId);
 
       const getMessagesByChatRoomIdService = container.resolve(
@@ -78,6 +80,25 @@ io.on('connect', (socket) => {
 
     console.log('new_message', { message, user });
     // socket.broadcast.to(data.chatRoomId).emit('new_message', {
+    // envia mensagem para usuario conectado ao socket
     io.to(data.chatRoomId).emit('new_message', { message, user });
+
+    const getChatRoomByIdService = container.resolve(GetChatRoomByIdService);
+    const chatRoom = await getChatRoomByIdService.execute(data.chatRoomId);
+
+    const participants = chatRoom?.usersId.filter(
+      (userId) => String(userId) !== String(user?._id),
+    );
+
+    console.log('participants', participants);
+    console.log('chatRoom', chatRoom);
+
+    participants?.forEach((participant) => {
+      io.to(participant?.socketId).emit('notification', {
+        type: 'new_message',
+        message: `${user?.name} sent a message`,
+        from: user?._id,
+      });
+    });
   });
 });
