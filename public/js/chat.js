@@ -48,7 +48,10 @@ function onLoad() {
   socket.on('new_message', (data) => {
     console.log('receive new message event');
     console.log('new_message', data);
-    addMessage(data);
+    const isCorrectChatRoom = data.message.roomId === chatRoomId;
+    if (isCorrectChatRoom) {
+      addMessage(data);
+    }
   });
 }
 
