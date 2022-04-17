@@ -1,4 +1,10 @@
 {
+  "name": "fast-talk",
+  "version": "1.0.0",
+  "description": "An app to create real-time chats.",
+  "main": "src/server.ts",
+  "repository": "https://github.com/joaobispo2077/fast-talk.git",
+  "author": "João Bispo <joaobispo2077@gmail.com>",
   "scripts": {
     "start": "node dist/server.js",
     "build": "tsc -p tsconfig-build.json",
