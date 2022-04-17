@@ -98,6 +98,7 @@ io.on('connect', (socket) => {
         type: 'new_message',
         message: `${user?.name} sent a message`,
         from: user?._id,
+        roomId: data.chatRoomId,
       });
     });
   });

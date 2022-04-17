@@ -56,13 +56,16 @@ function onLoad() {
 
   socket.on('notification', (data) => {
     console.log('notification', data);
-    const div = document.getElementById(`user_${data.from}`);
-    div.insertAdjacentHTML(
-      'afterbegin',
-      `
+
+    if (data.roomId !== chatRoomId) {
+      const div = document.getElementById(`user_${data.from}`);
+      div.insertAdjacentHTML(
+        'afterbegin',
+        `
       <div class="notification"></div>
       `,
-    );
+      );
+    }
   });
 }
 
