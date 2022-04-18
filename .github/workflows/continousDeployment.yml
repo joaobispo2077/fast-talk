@@ -1,4 +1,4 @@
-name: Deploy to Production
+name: Deploy API to Production
 
 on:
   push:
@@ -8,6 +8,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
 
     strategy:
       matrix:
