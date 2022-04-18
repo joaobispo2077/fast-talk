@@ -1,4 +1,4 @@
-package com.fasttalk;
+package com.mobile;
 
 import android.os.Build;
 import android.os.Bundle;
