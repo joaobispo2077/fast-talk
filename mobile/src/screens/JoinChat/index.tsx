@@ -1,5 +1,15 @@
-import { Box, Heading, Input, Text } from 'native-base';
+import {
+  Box,
+  Button,
+  FormControl,
+  Heading,
+  Input,
+  Stack,
+  Text,
+} from 'native-base';
 import React from 'react';
+
+import { ICONS } from '@src/components/icons';
 
 export const JoinChat = () => {
   return (
@@ -13,19 +23,37 @@ export const JoinChat = () => {
       <Box
         backgroundColor={'white'}
         width={'80%'}
-        height={'80%'}
-        borderRadius={4}
+        height={'50%'}
+        borderRadius={8}
         padding={4}
       >
-        <Heading size="xl" mb="4">
-          Join to the chat
+        <Heading size="xl" mb="4" color="orange.500">
+          Fast talk
         </Heading>
-        <Text fontSize="xl">
-          Headings are used for rendering headlines. Heading composes Text so
-          you can use all the style props.
+        <Text fontSize="xl" color="gray.400">
+          Connect with your friends and talk until the chat expires.
         </Text>
-        <Input size="2xl" placeholder="Chat name" />
-        <Input size="2xl" placeholder="Username" />
+        <FormControl>
+          <Stack space="2.5" marginTop={8}>
+            <Input
+              size="2xl"
+              placeholder="Chat name"
+              InputRightElement={ICONS.chat}
+            />
+            <Input
+              size="2xl"
+              placeholder="Username"
+              InputRightElement={ICONS.user}
+            />
+            <Input
+              size="2xl"
+              placeholder="Expiration in days"
+              type={'number'}
+              InputRightElement={ICONS.calendar}
+            />
+          </Stack>
+        </FormControl>
+        <Button marginTop={4}>Join to the chat</Button>
       </Box>
     </Box>
   );
