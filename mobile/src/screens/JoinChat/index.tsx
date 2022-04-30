@@ -1,7 +1,14 @@
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Box, Heading, Text } from 'native-base';
 import React from 'react';
 
 import { JoinChatForm } from '@src/components/JoinChatForm';
+import { StackNavigatorParamList } from '@src/routes';
+
+export type JoinChatScreenNavigationProps = NativeStackNavigationProp<
+  StackNavigatorParamList,
+  'JoinChat'
+>;
 
 export const JoinChat = () => {
   return (

@@ -1,4 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import {
   Button,
@@ -19,6 +20,8 @@ import { avatars } from './avatars';
 
 import { ICONS } from '@src/components/icons';
 import { apiBaseUrl } from '@src/configs';
+import { StackNavigatorParamList } from '@src/routes';
+import { JoinChatScreenNavigationProps } from '@src/screens/JoinChat';
 
 type JoinChatFormData = {
   chatname: string;
@@ -48,13 +51,16 @@ export const JoinChatForm = () => {
   } = useForm<JoinChatFormData>({
     resolver: yupResolver(schema),
   });
+  const navigation = useNavigation<JoinChatScreenNavigationProps>();
+
   const hasFormError = Object.keys(errors).length > 0;
 
   const onSubmit = async (data: JoinChatFormData) => {
     try {
       console.log('submiting with ', data);
-      const response = await axios.post(`${apiBaseUrl}/chats`, data);
-      console.log('response', response.data);
+      // const response = await axios.post(`${apiBaseUrl}/chats`, data);
+      // console.log('response', response.data);
+      navigation.navigate('Chat', { chatname: data.chatname });
     } catch (error: any) {
       Alert.alert('Error', error.message);
     }

@@ -3,18 +3,23 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Chat } from '@src/screens/Chat';
 import { JoinChat } from '@src/screens/JoinChat';
 
-const Stack = createStackNavigator();
+export type StackNavigatorParamList = {
+  JoinChat: undefined;
+  Chat: { chatname: string };
+};
+
+const { Navigator, Screen } = createStackNavigator<StackNavigatorParamList>();
 
 export const Routes = () => {
   return (
-    <Stack.Navigator
+    <Navigator
       initialRouteName="JoinChat"
       screenOptions={{
         headerShown: false,
       }}
     >
-      <Stack.Screen name="JoinChat" component={JoinChat} />
-      <Stack.Screen name="Chat" component={Chat} />
-    </Stack.Navigator>
+      <Screen name="JoinChat" component={JoinChat} />
+      <Screen name="Chat" component={Chat} />
+    </Navigator>
   );
 };

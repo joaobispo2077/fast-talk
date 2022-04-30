@@ -1,1 +1,1 @@
-export const apiBaseUrl = 'https://fast-talk-api.herokuapp.com/api';
+export const apiBaseUrl = null;

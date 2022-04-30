@@ -39,4 +39,13 @@ export const ICONS = {
       marginRight={2}
     />
   ),
+  goback: (
+    <Icon
+      as={Ionicons}
+      name="arrow-back"
+      size="5"
+      color="muted.400"
+      marginRight={2}
+    />
+  ),
 };
