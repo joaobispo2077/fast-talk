@@ -8,6 +8,9 @@ export type ChatRoom = Document & {
 };
 
 export const ChatRoomSchema = new Schema({
+  name: {
+    type: String,
+  },
   chatRoomId: {
     type: String,
     default: () => crypto.randomUUID(),
@@ -18,6 +21,9 @@ export const ChatRoomSchema = new Schema({
       ref: 'Users',
     },
   ],
+  expirationInDays: {
+    type: Number,
+  },
 });
 
 export const ChatRoomModel = mongoose.model<ChatRoom>(
