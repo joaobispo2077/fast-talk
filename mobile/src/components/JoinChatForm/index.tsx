@@ -1,8 +1,20 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, FormControl, Input, Stack } from 'native-base';
+import {
+  Box,
+  Button,
+  CheckIcon,
+  FormControl,
+  Image,
+  Input,
+  Select,
+  Stack,
+  WarningOutlineIcon,
+} from 'native-base';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
+
+import { avatars } from './avatars';
 
 import { ICONS } from '@src/components/icons';
 
@@ -10,6 +22,7 @@ type JoinChatFormData = {
   chatname: string;
   username: string;
   expirationInDays: string;
+  avatar?: string;
 };
 
 const schema = yup.object().shape({
@@ -75,9 +88,51 @@ export const JoinChatForm = () => {
           name="username"
           rules={{ required: 'Username is required', minLength: 4 }}
         />
-        <FormControl.ErrorMessage>
+        <FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>
           {errors.username?.message}
         </FormControl.ErrorMessage>
+        <Controller
+          control={control}
+          name="avatar"
+          render={({ field: { onChange, value } }) => (
+            <Select
+              minWidth="200"
+              accessibilityLabel="Choose Service"
+              placeholder="Avatar"
+              _selectedItem={{
+                bg: 'teal.600',
+                endIcon: <CheckIcon size={5} />,
+              }}
+              mt="1"
+              selectedValue={value}
+              onValueChange={(val) => onChange(val)}
+            >
+              {avatars.map((avatar) => (
+                <Select.Item
+                  key={avatar.name}
+                  label={avatar.label}
+                  value={avatar.url}
+                  accessibilityLabel="UX Research"
+                  leftIcon={
+                    <Image
+                      source={{
+                        uri: avatar.url,
+                      }}
+                      alt={avatar.label}
+                      width={10}
+                      height={10}
+                      borderRadius={20}
+                    />
+                  }
+                />
+              ))}
+            </Select>
+          )}
+        />
+        <FormControl.ErrorMessage>
+          {errors.avatar?.message}
+        </FormControl.ErrorMessage>
+
         <Controller
           control={control}
           render={({ field: { onChange, onBlur, value } }) => (
