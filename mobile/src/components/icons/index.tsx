@@ -48,4 +48,6 @@ export const ICONS = {
       marginRight={2}
     />
   ),
+  sendMessage: <Icon as={Ionicons} name="send" size="5" color="white" />,
+  settings: <Icon as={Ionicons} name="settings" size="8" color="gray.400" />,
 };
