@@ -46,7 +46,7 @@ io.on('connect', (socket) => {
       let chatRoom = await getChatRoomByUsersService.execute(users);
 
       if (!chatRoom) {
-        chatRoom = await createChatRoomService.execute(users);
+        chatRoom = await createChatRoomService.execute({ usersId: users });
       }
 
       console.log('chatRoom', chatRoom);

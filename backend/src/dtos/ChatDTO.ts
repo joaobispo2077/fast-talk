@@ -1,5 +1,5 @@
 export type CreateChatDTO = {
   usersId?: string[];
-  name: string;
+  name?: string;
   expirationInDays?: number;
 };
