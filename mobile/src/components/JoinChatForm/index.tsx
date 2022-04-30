@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
+import axios from 'axios';
 import {
-  Box,
   Button,
   CheckIcon,
   FormControl,
@@ -17,6 +17,7 @@ import * as yup from 'yup';
 import { avatars } from './avatars';
 
 import { ICONS } from '@src/components/icons';
+import { apiBaseUrl } from '@src/configs';
 
 type JoinChatFormData = {
   chatname: string;
@@ -29,6 +30,8 @@ type JoinChatFormData = {
 const schema = yup.object().shape({
   chatname: yup.string().required('The chat name is required'),
   username: yup.string().required('The username is required'),
+  avatar: yup.string(),
+  email: yup.string().email('The email is invalid'),
   expirationInDays: yup
     .number()
     .typeError('The value must be a number')
@@ -48,6 +51,8 @@ export const JoinChatForm = () => {
 
   const onSubmit = async (data: JoinChatFormData) => {
     console.log('submiting with ', data);
+    const response = await axios.post(`${apiBaseUrl}/chats`, data);
+    console.log('response', response.data);
   };
 
   console.log('errors', errors);
@@ -131,7 +136,7 @@ export const JoinChatForm = () => {
                   key={avatar.name}
                   label={avatar.label}
                   value={avatar.url}
-                  accessibilityLabel="UX Research"
+                  accessibilityLabel={avatar.name}
                   leftIcon={
                     <Image
                       source={{
