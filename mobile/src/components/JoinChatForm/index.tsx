@@ -12,6 +12,7 @@ import {
 } from 'native-base';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { Alert } from 'react-native';
 import * as yup from 'yup';
 
 import { avatars } from './avatars';
@@ -50,9 +51,13 @@ export const JoinChatForm = () => {
   const hasFormError = Object.keys(errors).length > 0;
 
   const onSubmit = async (data: JoinChatFormData) => {
-    console.log('submiting with ', data);
-    const response = await axios.post(`${apiBaseUrl}/chats`, data);
-    console.log('response', response.data);
+    try {
+      console.log('submiting with ', data);
+      const response = await axios.post(`${apiBaseUrl}/chats`, data);
+      console.log('response', response.data);
+    } catch (error: any) {
+      Alert.alert('Error', error.message);
+    }
   };
 
   console.log('errors', errors);
