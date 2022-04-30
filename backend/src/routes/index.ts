@@ -3,8 +3,7 @@ import { Router } from 'express';
 import { container } from 'tsyringe';
 
 import { CreateChatRoomService } from '../services/CreateChatRoomService';
-
-import { CreateUserService } from 'src/services/CreateUserService';
+import { CreateUserService } from '../services/CreateUserService';
 
 const router = Router();
 
