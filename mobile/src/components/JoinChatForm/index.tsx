@@ -23,6 +23,7 @@ type JoinChatFormData = {
   username: string;
   expirationInDays: string;
   avatar?: string;
+  email: string;
 };
 
 const schema = yup.object().shape({
@@ -90,6 +91,24 @@ export const JoinChatForm = () => {
         />
         <FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>
           {errors.username?.message}
+        </FormControl.ErrorMessage>
+        <Controller
+          control={control}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <Input
+              size="2xl"
+              placeholder="Email"
+              InputRightElement={ICONS.email}
+              value={value}
+              onChangeText={(val) => onChange(val)}
+              onBlur={onBlur}
+            />
+          )}
+          name="email"
+          rules={{ required: 'email is required' }}
+        />
+        <FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>
+          {errors.email?.message}
         </FormControl.ErrorMessage>
         <Controller
           control={control}

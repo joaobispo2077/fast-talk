@@ -15,7 +15,7 @@ export const JoinChat = () => {
       <Box
         backgroundColor={'white'}
         width={'80%'}
-        height={'lg'}
+        height={'xl'}
         borderRadius={8}
         padding={4}
       >

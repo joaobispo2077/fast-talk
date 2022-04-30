@@ -30,4 +30,13 @@ export const ICONS = {
       marginRight={2}
     />
   ),
+  email: (
+    <Icon
+      as={Ionicons}
+      name="mail"
+      size="5"
+      color="muted.400"
+      marginRight={2}
+    />
+  ),
 };
