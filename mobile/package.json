@@ -30,7 +30,8 @@
     "react-native-svg": "^12.3.0",
     "react-native-web": "0.17.1",
     "react-use-websocket": "^2.9.1",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "expo-app-loading": "~1.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
